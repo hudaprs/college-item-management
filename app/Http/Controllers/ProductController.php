@@ -77,7 +77,6 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
-            'image' => 'nullable|image|max:2040',
             'stock' => 'required',
             'price' => 'required'
         ]);
@@ -119,7 +118,6 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'description' => 'required',
-            'image' => 'nullable|image|max:2040',
             'stock' => 'required',
             'price' => 'required'
         ]);
