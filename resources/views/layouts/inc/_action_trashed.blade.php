@@ -1,0 +1,2 @@
+<a href="{{ $url_restore }}" class="btn btn-success btn-sm" id="btn-restore" title="{{ $model->name }}"><span class="fa fa-check">&nbsp;</span></a>
+<a href="{{ $url_delete_permanent }}" class="btn btn-danger btn-sm edit" id="btn-delete-permanent" title=" {{ $model->name }}"><span class="fa fa-trash">&nbsp;</span></a>

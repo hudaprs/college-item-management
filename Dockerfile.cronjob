@@ -1,0 +1,59 @@
+FROM php:7.2-cli
+
+ARG TIMEZONE
+
+RUN if [ -z "$TIMEZONE" ] ; then "Not defined"; \
+else export TZ=${TIMEZONE}; \
+fi
+
+RUN apt-get update && apt-get install -y \
+      libicu-dev \
+      libpq-dev \
+      libmcrypt-dev \
+      libpng-dev \
+      libxml2-dev \
+      git \
+      zip \
+      unzip \
+      gnupg \
+      libcurl4-openssl-dev \
+      && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+      && docker-php-ext-configure mysqli --with-mysqli=mysqlnd \
+      && docker-php-ext-install pdo_mysql \
+      && docker-php-ext-install gd \
+      && docker-php-ext-install zip
+
+
+RUN apt-get update && apt-get install -y libmemcached-dev zlib1g-dev \
+    && pecl install memcached mcrypt-1.0.2 \
+    && docker-php-ext-enable memcached.so \
+    && docker-php-ext-enable mcrypt
+
+RUN apt-get install
+
+RUN docker-php-ext-install mysqli mbstring pdo pdo_mysql tokenizer xml
+
+#install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+
+ENV APP_WORKDIR=/var/www
+
+RUN apt-get update && apt-get -y install cron
+
+COPY cronjob /etc/cron.d/cronjob
+RUN chmod 0644 /etc/cron.d/cronjob
+RUN crontab /etc/cron.d/cronjob
+RUN touch /var/log/cron.log
+
+COPY . ${APP_WORKDIR}
+
+WORKDIR ${APP_WORKDIR}
+
+# install All dDependencies
+RUN export COMPOSER_ALLOW_SUPERUSER=1
+RUN composer install --no-interaction
+RUN php artisan key:generate
+RUN php artisan cache:clear
+RUN php artisan config:cache
+
+CMD cron && tail -f /var/log/cron.log

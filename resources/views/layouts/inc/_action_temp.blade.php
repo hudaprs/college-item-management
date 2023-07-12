@@ -1,0 +1,3 @@
+<a href="{{ $url_show }}" class="btn btn-sm btn-primary" id="btn-show" title="Detail {{ $model->name }}"><span class="fa fa-eye">&nbsp;</span></a>
+<a href="{{ $url_edit }}" class="btn btn-sm btn-warning edit" id="btn-modal-show" title="Edit {{ $model->name }}"><span class="fa fa-edit">&nbsp;</span></a>
+<a href="{{ $url_destroy }}" class="btn btn-sm btn-danger" id="btn-delete-permanent" title="{{ $model->name }}"><span class="fa fa-trash">&nbsp;</span></a>

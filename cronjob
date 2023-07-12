@@ -1,0 +1,1 @@
+0 8 * * * /usr/local/bin/php /var/www/artisan event:sent /var/log/cron.log 2>&1
