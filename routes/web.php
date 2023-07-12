@@ -14,6 +14,7 @@ Route::group(['prefix' => 'dev'], function () {
 	Route::get('users/datatables', 'Managements\DataTablesController@usersDataTables')->name('users.datatables');
 	Route::get('users/datatables/trashed', 'Managements\DataTablesController@usersTrashedDataTables')->name('users.datatables.trashed');
 	Route::resource('users', 'UserController');
+	Route::resource('products', 'ProductController');
 });
 
 Auth::routes();
