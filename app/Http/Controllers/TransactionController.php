@@ -15,11 +15,6 @@ class TransactionController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         // Check if request is ajax
@@ -48,12 +43,6 @@ class TransactionController extends Controller
         return view('pages.managements.transactions.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         DB::beginTransaction();
@@ -95,12 +84,6 @@ class TransactionController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $transaction = Transaction::findOrFail($id);

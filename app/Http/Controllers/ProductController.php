@@ -31,11 +31,6 @@ class ProductController extends Controller
         return $fileNameToStore;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         // Check if request is ajax
