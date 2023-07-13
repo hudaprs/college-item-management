@@ -11,10 +11,13 @@ Route::get('/', function () {
 Route::group(['prefix' => 'dev'], function () {
 	Route::get('/', 'HomeController@index');
 	Route::get('/dev', 'HomeController@index');
-	Route::get('users/datatables', 'Managements\DataTablesController@usersDataTables')->name('users.datatables');
-	Route::get('users/datatables/trashed', 'Managements\DataTablesController@usersTrashedDataTables')->name('users.datatables.trashed');
 	Route::resource('users', 'UserController');
 	Route::resource('products', 'ProductController');
+	Route::prefix('transactions')->group(function () {
+		Route::get('/', 'TransactionController@index')->name('transactions.index');
+		Route::post('/', 'TransactionController@store')->name('transactions.store');
+		Route::get('{id}', 'TransactionController@show')->name('transactions.show');
+	});
 });
 
 Auth::routes();

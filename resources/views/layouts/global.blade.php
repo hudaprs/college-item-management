@@ -173,6 +173,30 @@
             </ul>
           </li>
 
+          <li class="nav-item has-treeview
+            @if(url()->current() == url('/dev/transactions'))
+              {{ 'menu-open' }}
+            @else
+              {{ null }}
+            @endif
+          ">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-gear"></i>
+              <p>
+                Transaction Mngmts
+                <i class="right fa fa-angle-down"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('transactions.index') }}" class="nav-link {{ url()->current() == url('/dev/transactions') ? 'active': null }}">
+                  <em class="fa fa-book nav-icon"></em>
+                  <p>Transactions</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           {{-- Logout --}}
           <form action="{{ route('logout') }}" id="logout-form" method="POST" style="display: none;">
             @csrf

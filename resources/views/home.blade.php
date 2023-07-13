@@ -38,7 +38,10 @@
             </div>
           </div>
 
-          <button class="btn btn-success btn-block">
+          <button 
+            class="btn btn-success btn-block btn-transaction-buy" 
+            data-id="{{ $product->id }}"
+          >
             Buy
           </button>
         </div>
@@ -47,3 +50,61 @@
   </div>
 @endsection
 
+@push('script')
+	<script>
+		$(function () {
+      $('.btn-transaction-buy').on('click', function(event) {
+        event.preventDefault()
+
+        const csrf_token = $("meta[name=csrf-token]").attr("content")
+
+        const formData = new FormData()
+        formData.append('_token', csrf_token)
+        formData.append('product_id', $(this).attr('data-id'))
+
+        Swal.fire({
+          title: "Are you sure want to buy?",
+          text: "Choose Option Wisely",
+          type: "info",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, I Do!",
+        }).then((result) => {
+          if (result.value) {
+            $.ajax({
+              url: '/dev/transactions',
+              method: 'POST',
+              contentType: false,
+              processData: false,
+              data: formData,
+              beforeSend: function() {
+                console.log("BEFORE SEND")
+              },
+              success: function(data) {
+                toastr.success(data.message, "SUCCESS");
+              },
+              error: function() {
+                console.log("ERROR")
+              }
+            })
+          }
+        })
+      })
+
+			$("#datatable").DataTable({
+				processing: true,
+				responsive: true,
+				serverSide: true,
+				ajax: "{{ route('users.index') }}",
+				columns: [
+					{ data: 'DT_RowIndex', name: 'id' },
+					{ data: 'name', name: 'name' },
+					{ data: 'email', name: 'email' },
+					{ data: 'role', name: 'role' },
+					{ data: 'action', name: 'action' }
+				]
+			})
+		})
+	</script>
+@endpush

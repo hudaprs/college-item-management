@@ -1,3 +1,3 @@
-<a href="{{ $url_show }}" class="btn btn-sm btn-primary" id="btn-show" title="Detail {{ $model->name }}"><span class="fa fa-eye">&nbsp;</span></a>
-<a href="{{ $url_edit }}" class="btn btn-sm btn-warning edit" id="btn-modal-show" title="Edit {{ $model->name }}"><span class="fa fa-edit">&nbsp;</span></a>
-<a href="{{ $url_destroy }}" class="btn btn-sm btn-danger" id="btn-delete-permanent" title="{{ $model->name }}"><span class="fa fa-trash">&nbsp;</span></a>
+<a href="{{ isset($url_show) ? $url_show : '#' }}" class="btn btn-sm btn-primary" style="display: {{ isset($url_show) ? '' : 'none' }};" id="btn-show" title="Detail {{ isset($model) ? $model->name : '' }}"><span class="fa fa-eye">&nbsp;</span></a>
+<a href="{{ isset($url_edit) ? $url_edit : '#' }}" class="btn btn-sm btn-warning edit" style="display: {{ isset($url_edit) ? '' : 'none' }};" id="btn-modal-show" title="Edit {{ isset($model) ? $model->name : '' }}"><span class="fa fa-edit">&nbsp;</span></a>
+<a href="{{ isset($url_destroy) ? $url_destroy : '#' }}" class="btn btn-sm btn-danger hide" style="display: {{ isset($url_destroy) ? '' : 'none' }};" id="btn-delete-permanent" title="{{ isset($model) ? $model->name : '' }}"><span class="fa fa-trash">&nbsp;</span></a>

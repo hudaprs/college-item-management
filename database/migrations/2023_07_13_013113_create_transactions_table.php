@@ -20,6 +20,7 @@ class CreateTransactionsTable extends Migration
             $table->string('product_price');
             $table->string('status');
             $table->string('quantity');
+            $table->float('total_price');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
