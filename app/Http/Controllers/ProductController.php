@@ -13,6 +13,13 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            if (auth()->user()->role === "User") {
+                return redirect('/dev');
+            }
+
+            return $next($request);
+        });
     }
 
     private static function _uploadFile(Request $request)

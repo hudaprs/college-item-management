@@ -125,12 +125,14 @@
           </li>
 
           {{-- Managements --}}
-          <li class="nav-item has-treeview
-            @if(url()->current() == url('/dev/users'))
-              {{ 'menu-open' }}
-            @else
-              {{ null }}
-            @endif
+          <li 
+            style="display: {{ auth()->user()->role === 'Admin' ? '' : 'none' }}"
+            class="nav-item has-treeview
+              @if(url()->current() == url('/dev/users'))
+                {{ 'menu-open' }}
+              @else
+                {{ null }}
+              @endif
           ">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-gear"></i>
@@ -149,12 +151,14 @@
             </ul>
           </li>
 
-          <li class="nav-item has-treeview
-            @if(url()->current() == url('/dev/products'))
-              {{ 'menu-open' }}
-            @else
-              {{ null }}
-            @endif
+          <li 
+            style="display: {{ auth()->user()->role === 'Admin' ? '' : 'none' }}"
+            class="nav-item has-treeview
+              @if(url()->current() == url('/dev/products'))
+                {{ 'menu-open' }}
+              @else
+                {{ null }}
+              @endif
           ">
             <a href="#" class="nav-link">
               <i class="nav-icon fa fa-gear"></i>
