@@ -10,6 +10,7 @@ class Transaction extends Model
         'product_name',
         'product_description',
         'product_price',
+        'product_image',
         'status',
         'quantity',
         'user_id',

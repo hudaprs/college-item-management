@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->string('product_name');
             $table->string('product_description');
             $table->string('product_price');
+            $table->string('product_image');
             $table->string('status');
             $table->string('quantity');
             $table->float('total_price');

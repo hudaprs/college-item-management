@@ -59,6 +59,7 @@ class TransactionController extends Controller
             $transaction->product_name = $product->name;
             $transaction->product_description = $product->description;
             $transaction->product_price = $product->price;
+            $transaction->product_image = $product->image;
             $transaction->quantity = 1;
             $transaction->total_price = $product->price;
             $transaction->status = "Pending";
